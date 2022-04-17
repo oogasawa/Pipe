@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.ogalab</groupId>
+    <artifactId>Pipe</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+<!--
+       <dependency>
+            <groupId>net.ogalab</groupId>
+            <artifactId>MicroUtil-container</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.ogalab</groupId>
+            <artifactId>MicroUtil-functor</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.ogalab</groupId>
+            <artifactId>MicroUtil-file</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+-->
+    </dependencies>
+ 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin> 
+ 
+ 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <linksource>true</linksource>
+                    <show>private</show>
+                    <maxmemory>1g</maxmemory>
+                </configuration>
+            </plugin>
+ 
+        </plugins>
+    
+    
+        <extensions>
+            <!-- for webdav based private repositories -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
+    
+    
+    </build>
+ 
+    <!-- private repositories from which libraries are downloaded -->
+    <repositories>
+        <repository>
+            <id>private-webdav-repository</id>
+            <name>oga private</name>
+            <url>dav:http://www.ogalab.net/maven2</url>
+        </repository>
+        <repository>
+            <id>private-webdav-snapshot-repository</id>
+            <name>oga private snapshot</name>
+            <url>dav:http://www.ogalab.net/maven2/maven2-snapshot</url>
+        </repository>
+    </repositories> 
+
+ 
+    <!-- Private repositories to which this archtect is uploaded -->
+    <distributionManagement>
+        <!-- Configuration for webdav based private repositories -->
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>private-webdav-repository</id>
+            <name>oga private</name>
+            <url>dav:http://www.ogalab.net/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>private-webdav-snapshot-repository</id>
+            <name>oga private snapshot</name>
+            <url>dav:http://www.ogalab.net/maven2/maven2-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
