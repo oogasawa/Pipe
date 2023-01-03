@@ -1,6 +1,7 @@
 package com.github.oogasawa.Pipe.filter;
 
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Out;
@@ -8,8 +9,9 @@ import com.github.oogasawa.Pipe.Pipe;
 
 
 public class GetRow extends Filter {
-	//In     in = null;
-	//Out    out = null;
+
+	private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
+	
 	protected Predicate<String> pred = null;
 	
 	public GetRow(In in, Out out, Predicate<String> pred) {
@@ -34,9 +36,7 @@ public class GetRow extends Filter {
 		out.end();
 		}
 		catch (Exception e) {
-			System.err.println("Runtime exception in GetRow.run()");
-			e.printStackTrace();
-			System.exit(-1);
+			logger.throwing("com.github.oogasawa.Pipe.filter.GetRow", "run", e);
 		}
 	}
 

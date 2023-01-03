@@ -1,6 +1,7 @@
 package com.github.oogasawa.Pipe.filter;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Out;
@@ -10,6 +11,8 @@ import com.github.oogasawa.utility.types.string.StringUtil;
 
 
 public class RemoveColumn extends Filter {
+
+	private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
 	
 	int[] col = null;
 	
@@ -59,9 +62,7 @@ public class RemoveColumn extends Filter {
 			}
 			out.end();
 		} catch (Exception e) {
-			System.err.println("Runtime exception in RemoveColumn.run() ");
-			e.printStackTrace();
-			System.exit(-1);
+			logger.throwing("com.github.oogasawa.Pipe.filter.RemoveColumn", "run", e);
 		}
 	}
 

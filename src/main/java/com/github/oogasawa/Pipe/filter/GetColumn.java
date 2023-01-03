@@ -1,18 +1,19 @@
 package com.github.oogasawa.Pipe.filter;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Out;
 import com.github.oogasawa.Pipe.Pipe;
 import com.github.oogasawa.utility.types.collection.ListUtil;
 import com.github.oogasawa.utility.types.string.StringUtil;
 
-import org.slf4j.LoggerFactory;
 
 public class GetColumn extends Filter {
 
-    protected static org.slf4j.Logger log = LoggerFactory.getLogger(GetColumn.class);
-    
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");    
+
     int[] col = null;
 
     public GetColumn(In in, Out out, int[] col) {
@@ -47,11 +48,6 @@ public class GetColumn extends Filter {
             while ((line = in.getLine()) != Pipe.END) {
                 inCols = StringUtil.splitByTab(line);
 
-                //if (counter > 461000 && counter < 461040) {
-                //    log.debug(line);
-                //} 
-                
-                
                 for (int i = 0; i < col.length; i++) {
                     outCols.set(i, inCols.get(col[i]));
                 }
@@ -63,12 +59,12 @@ public class GetColumn extends Filter {
             }
             out.end();
         } catch (Exception e) {
-            System.err.println("Runtime exception in GetColumn.run() : " + counter + "\t" + line + "\n" 
-                    + ListUtil.join("\t", inCols) + "\n"
-                    + ListUtil.join("\t", outCols) + "\n"
-                    + prevIn +"\n" + prevOut);
-            e.printStackTrace();
-            System.exit(-1);
+            logger.throwing("com.github.oogasawa.Pipe.filter.GetColumn", "run", e);
+            logger.fine(String.format("%d\t%s", counter, line));
+            logger.fine(ListUtil.join("\t", inCols));
+            logger.fine(ListUtil.join("\t", outCols));
+            logger.fine(prevIn);
+            logger.fine(prevOut);
         }
     }
 }

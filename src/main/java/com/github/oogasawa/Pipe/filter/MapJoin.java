@@ -2,6 +2,8 @@ package com.github.oogasawa.Pipe.filter;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Logger;
+
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Out;
 import com.github.oogasawa.Pipe.Pipe;
@@ -15,6 +17,8 @@ import com.github.oogasawa.utility.types.string.StringUtil;
  */
 public class MapJoin extends Filter {
 
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
+    
     public final static int COLLAPSED = 1;
     public final static int REVERSED = 2;
 
@@ -43,9 +47,7 @@ public class MapJoin extends Filter {
             join();
 
         } catch (Exception e) {
-            System.err.println("Runtime error in the MapJoin.run() ");
-            e.printStackTrace();
-            System.exit(-1);
+            logger.throwing("com.github.oogasawa.Pipe.filter.MapJoin", "run", e);
         }
 
     }

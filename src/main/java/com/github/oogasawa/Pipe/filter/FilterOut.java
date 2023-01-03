@@ -1,6 +1,8 @@
 package com.github.oogasawa.Pipe.filter;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Out;
 import com.github.oogasawa.Pipe.Pipe;
@@ -14,6 +16,8 @@ import com.github.oogasawa.utility.types.string.StringUtil;
  */
 public class FilterOut extends Filter {
 
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
+    
     //Predicate<String> pred = null;
     //String outfile = "/dev/null";
     int colIdx = 0;
@@ -46,8 +50,7 @@ public class FilterOut extends Filter {
             }
             out.end();
         } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(-1);
+            logger.throwing("com.github.oogasawa.Pipe.filter.FilterOut", "run", e);
         }
     }
     

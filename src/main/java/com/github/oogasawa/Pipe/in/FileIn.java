@@ -10,12 +10,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Logger;
 
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Pipe;
 
 public class FileIn implements In {
 
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
+    
     private BufferedReader reader;
 
     public FileIn(String filename) throws FileNotFoundException {
@@ -30,9 +33,7 @@ public class FileIn implements In {
                 line = Pipe.END;
 
         } catch (IOException e) {
-            System.err.println("Runtime exception in FileIn.getLine() ");
-            e.printStackTrace();
-            System.exit(-1);
+            logger.throwing("com.github.oogasawa.Pipe.in.FileIn", "run", e);
         }
         return line;
     }
@@ -41,9 +42,7 @@ public class FileIn implements In {
         try {
             reader.close();
         } catch (IOException e) {
-            System.err.println("Runtime exception in FileIn.close() ");
-            e.printStackTrace();
-            System.exit(-1);
+            logger.throwing("com.github.oogasawa.Pipe.in.FileIn", "close", e);
         }
     }
 }

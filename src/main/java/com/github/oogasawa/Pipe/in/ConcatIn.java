@@ -1,16 +1,16 @@
 package com.github.oogasawa.Pipe.in;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Pipe;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ConcatIn implements In {
+
     
-    Logger logger = LoggerFactory.getLogger(ConcatIn.class);
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
 
     ArrayList<In> entity = new ArrayList<In>();
     int current = 0;
@@ -27,7 +27,7 @@ public class ConcatIn implements In {
         String line = entity.get(current).getLine();
         
         if (lineno++ % 1000 == 0)
-            logger.info(String.format("%d",lineno));
+            logger.fine(String.format("%d",lineno));
         
         if (line.equals(Pipe.END)) {
             current++;

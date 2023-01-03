@@ -2,6 +2,7 @@ package com.github.oogasawa.Pipe.filter;
 
 import java.io.PrintWriter;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 //import com.github.oogasawa.microutil.file.FileIO;
 import com.github.oogasawa.Pipe.In;
@@ -11,6 +12,8 @@ import com.github.oogasawa.utility.files.FileIO;
 
 public class FilterOutMatchedRows extends Filter {
 
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
+    
     Predicate<String> pred = null;
     String outfile = "/dev/null";
 
@@ -46,9 +49,7 @@ public class FilterOutMatchedRows extends Filter {
             pw.close();
             out.end();
         } catch (Exception e) {
-            System.err.println("Runtime error in FilterOutMatchedRows.run() ");
-            e.printStackTrace();
-            System.exit(-1);
+            logger.throwing("com.github.oogasawa.Pipe.filter.FilterOutMatchedRows", "run", e);
         }
     }
 

@@ -1,19 +1,17 @@
 package com.github.oogasawa.Pipe.filter;
 
 import java.util.Set;
+import java.util.logging.Logger;
 
-//import com.github.oogasawa.microutil.container.Frequency;
-//import com.github.oogasawa.microutil.exception.RuntimeExceptionUtil;
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Out;
 import com.github.oogasawa.Pipe.Pipe;
 import com.github.oogasawa.utility.types.collection.Frequency;
 
-import org.slf4j.LoggerFactory;
 
 public class Freq extends Filter {
 
-    protected static org.slf4j.Logger log = LoggerFactory.getLogger(Freq.class);
+    protected static Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
 
     Frequency<String> frequency = new Frequency<String>();
 
@@ -34,9 +32,9 @@ public class Freq extends Filter {
                 frequency.add(line);
                 counter++;
                 if (counter % 1000 == 0)
-                    log.debug("counter: " + counter);
+                    logger.fine("counter: " + counter);
             }
-            log.debug("counter (end):  " + counter);
+            logger.fine("counter (end):  " + counter);
             
             Set<String> keys = frequency.keySet();
             for (String k : keys) {
@@ -44,9 +42,7 @@ public class Freq extends Filter {
             }
             out.end();
         } catch (Exception e) {
-            System.err.println("Runtime error in Freq.run() ");
-            e.printStackTrace();
-            System.exit(-1);
+            logger.throwing("com.github.oogasawa.Pipe.filter.Freq", "run", e);
         }
 
     }

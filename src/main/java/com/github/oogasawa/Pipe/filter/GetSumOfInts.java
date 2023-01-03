@@ -1,20 +1,18 @@
 package com.github.oogasawa.Pipe.filter;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.github.oogasawa.Pipe.In;
 import com.github.oogasawa.Pipe.Out;
 import com.github.oogasawa.Pipe.Pipe;
-//import com.github.oogasawa.microutil.container.MapOfList;
-//import com.github.oogasawa.microutil.exception.RuntimeExceptionUtil;
-//import com.github.oogasawa.microutil.type.StringUtil;
-//import com.github.oogasawa.microutil.type.Type;
 import com.github.oogasawa.utility.types.collection.MapOfList;
 import com.github.oogasawa.utility.types.string.StringUtil;
 
 public class GetSumOfInts extends Filter {
-	//In     in = null;
-	//Out    out = null;
+
+	private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
+	
 	int idCol    = 0;
 	int valueCol = 1;
 	
@@ -56,9 +54,7 @@ public class GetSumOfInts extends Filter {
 		out.end();
 		}
 		catch (Exception e) {
-			System.err.println("Runtime exception in GetSumOfInts.run()");
-			e.printStackTrace();
-			System.exit(-1);
+			logger.throwing("com.github.oogasawa.Pipe.filter.GetSumOfInts", "run", e);
 		}
 	}
 

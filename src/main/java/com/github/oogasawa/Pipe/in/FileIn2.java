@@ -3,10 +3,8 @@ package com.github.oogasawa.Pipe.in;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.github.oogasawa.Pipe.In;
@@ -15,14 +13,17 @@ import com.github.oogasawa.Pipe.Pipe;
 
 public class FileIn2 implements In {
 
+    private static final Logger logger = Logger.getLogger("com.github.oogasawa.Pipe");
+    
     private BufferedReader reader = null;
     StringBuilder sb = new StringBuilder();
     
     public FileIn2(String filename) throws FileNotFoundException {
         try {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF8"));
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(FileIn2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException e) {
+            logger.throwing("com.github.oogasawa.Pipe.in.FileIn2", "constructor", e);
+            //Logger.getLogger(FileIn2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -66,8 +67,8 @@ public class FileIn2 implements In {
                 reader.close();
                 reader = null;
             }
-        } catch (IOException ex) {
-            Logger.getLogger(FileIn2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            logger.throwing("com.github.oogasawa.Pipe.in.FileIn2", "getLine", e);
         }
 
         return buffer.toString();            
@@ -76,10 +77,8 @@ public class FileIn2 implements In {
     public void close() {
         try {
             reader.close();
-        } catch (IOException e) {
-            System.err.println("Runtime exception in FileIn2.close() ");
-            e.printStackTrace();
-            System.exit(-1);
+        } catch (Exception e) {
+            logger.throwing("com.github.oogasawa.Pipe.in.FileIn2", "close", e);
         }
     }
 }
