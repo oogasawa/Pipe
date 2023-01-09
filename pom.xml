@@ -3,7 +3,7 @@
 
     <groupId>com.github.oogasawa</groupId>
     <artifactId>Pipe</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
 
 
     <name>Pipe</name>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.github.oogasawa</groupId>
             <artifactId>Utility-types</artifactId>
-            <version>0.9.1</version>
+            <version>0.11.0</version>
         </dependency>
 
         <dependency>
